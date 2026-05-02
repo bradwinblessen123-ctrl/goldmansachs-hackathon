@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { viteSingleFile } from 'vite-plugin-singlefile'
 
 export default defineConfig({
-  plugins: [react()],
-  server: { port: 3333 }
+  plugins: [react(), viteSingleFile()],
+  server: { port: 3333 },
+  build: { target: 'esnext' }
 })
