@@ -1,5 +1,4 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
+import { Routes, Route } from 'react-router-dom'
 import { AppProvider, useApp } from './context/AppContext'
 import BottomNav from './components/BottomNav'
 import TermDrawer from './components/TermDrawer'
@@ -14,24 +13,21 @@ import Scenarios from './screens/Scenarios'
 
 function AppShell() {
   const { onboarded, activeTerm, closeTerm } = useApp()
-  const location = useLocation()
 
   if (!onboarded) return <Onboarding />
 
   return (
     <div className="app-shell">
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/holdings" element={<Holdings />} />
-          <Route path="/holdings/:symbol" element={<PositionDetail />} />
-          <Route path="/markets" element={<MarketIntel />} />
-          <Route path="/learn" element={<LearningCenter />} />
-          <Route path="/goals" element={<Goals />} />
-          <Route path="/scenarios" element={<Scenarios />} />
-        </Routes>
-      </AnimatePresence>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/holdings" element={<Holdings />} />
+        <Route path="/holdings/:symbol" element={<PositionDetail />} />
+        <Route path="/markets" element={<MarketIntel />} />
+        <Route path="/learn" element={<LearningCenter />} />
+        <Route path="/goals" element={<Goals />} />
+        <Route path="/scenarios" element={<Scenarios />} />
+      </Routes>
       <BottomNav />
       <TermDrawer termKey={activeTerm} onClose={closeTerm} />
     </div>

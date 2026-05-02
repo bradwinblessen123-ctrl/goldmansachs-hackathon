@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { ChevronRight, Target, Shield, Clock } from 'lucide-react'
 import { useApp } from '../context/AppContext'
 
@@ -21,6 +22,7 @@ const YEARS = [2030, 2035, 2040, 2045, 2050, 2055]
 
 export default function Onboarding() {
   const { setOnboarded, setUserProfile } = useApp()
+  const navigate = useNavigate()
   const [step, setStep] = useState(0)
   const [goal, setGoal] = useState('')
   const [risk, setRisk] = useState('')
@@ -56,6 +58,7 @@ export default function Onboarding() {
     } else {
       setUserProfile(p => ({ ...p, goal, riskProfile: risk, targetYear }))
       setOnboarded(true)
+      navigate('/dashboard')
     }
   }
 
